@@ -6,9 +6,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
 import cookies from "universal-cookie";
+import { useUser } from "../context/User";
 
 function CompanySignUp() {
   const [loading, setLoading] = useState(false);
+  const { setUser } = useUser();
 
   useEffect(() => {
     window.scrollTo({
@@ -16,6 +18,7 @@ function CompanySignUp() {
       behavior: "smooth",
     });
   }, []);
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const cookie = new cookies();
@@ -85,10 +88,8 @@ function CompanySignUp() {
         headers: { "Content-type": "application/json" },
       })
         .then((res) => {
-          cookie.set("token", res.data);
           setLoading(false);
-          navigate("/");
-          window.location.reload();
+          setUser("Employer");
         })
         .catch((err) => {
           setLoading(false);

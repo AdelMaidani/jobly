@@ -5,9 +5,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { useUser } from "../context/User";
 
 function EmployeeSignUp() {
   const [loading, setLoading] = useState(false);
+  const { setUser } = useUser();
 
   useEffect(() => {
     window.scrollTo({
@@ -16,7 +18,6 @@ function EmployeeSignUp() {
     });
   }, []);
 
-  const cookie = new Cookies();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -85,10 +86,8 @@ function EmployeeSignUp() {
         headers: { "Content-type": "application/json" },
       })
         .then(async (res) => {
-          cookie.set("token", res.data);
           setLoading(false);
-          navigate("/");
-          window.location.reload();
+          setUser("Employee");
         })
         .catch((err) => {
           setLoading(false);

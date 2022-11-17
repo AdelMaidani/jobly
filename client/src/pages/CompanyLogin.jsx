@@ -4,7 +4,7 @@ import Illustration from "../assets/Illustrations/work.webp";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import cookies from "universal-cookie";
+import { useUser } from "../context/User";
 import { useState } from "react";
 
 function CompanyLogin() {
@@ -14,8 +14,9 @@ function CompanyLogin() {
       behavior: "smooth",
     });
   }, []);
+
+  const { setUser } = useUser();
   const [error, setError] = useState("");
-  const cookie = new cookies();
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -35,11 +36,10 @@ function CompanyLogin() {
         headers: { "Content-Type": "Application/json" },
         url: "http://localhost:3000/company/login",
         data: values,
+        withCredentials: true,
       })
         .then((res) => {
-          cookie.set("token", res.data);
-          navigate("/");
-          window.location.reload();
+          setUser("Employer");
         })
         .catch((err) => setError(err.response.data));
     },

@@ -5,9 +5,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import cookies from "universal-cookie";
+import { useUser } from "../context/User";
+import MainApp from "../MainApp";
 
 function EmployeeLogin() {
   const [loading, setLoading] = useState(false);
+  const { setUser } = useUser();
 
   useEffect(() => {
     window.scrollTo({
@@ -42,10 +45,9 @@ function EmployeeLogin() {
         data: values,
       })
         .then((res) => {
-          cookie.set("token", res.data);
           setLoading(false);
-          navigate("/");
-          window.location.reload();
+          setUser("Employee");
+          MainApp();
         })
         .catch((err) => {
           setLoading(false);

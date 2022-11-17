@@ -10,5 +10,6 @@ module.exports = companyLogin = async (req, res) => {
   if (!validPassword) return res.status(400).send("Invalid Password");
 
   const token = jwt.sign({ _id: user._id, type: "company" }, process.env.TOKEN);
-  res.send(JSON.stringify(token));
+  res.cookie("Jobly", token, { httpOnly: true, path: "/" });
+  res.send("logged in");
 };
