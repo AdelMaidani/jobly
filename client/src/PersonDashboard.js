@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavbarPerson from "./components/NavbarPerson";
 import Applications from "./pages/Person Dashboard/Applications";
@@ -6,11 +5,11 @@ import Profile from "./pages/Person Dashboard/Profile";
 import Jobs from "./pages/Person Dashboard/Jobs";
 import JobDescription from "./pages/Person Dashboard/JobDescription";
 import CompanyProfile from "./pages/Person Dashboard/CompanyProfile";
-import { PersonProvider } from "./context/personContext";
+import { UserProvide } from "./context/User";
 
 function PersonDashboard() {
   return (
-    <PersonProvider>
+    <UserProvide>
       <NavbarPerson />
       <Routes>
         <Route path="/applications" element={<Applications />} />
@@ -19,7 +18,7 @@ function PersonDashboard() {
         <Route path="/job/:id" element={<JobDescription />} />
         <Route path="/company/:id" element={<CompanyProfile />} />
       </Routes>
-    </PersonProvider>
+    </UserProvide>
   );
 }
 

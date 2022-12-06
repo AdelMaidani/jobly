@@ -5,7 +5,6 @@ import company2 from "../assets/Random Company Logos/preview_image20201021-12242
 import company3 from "../assets/Random Company Logos/preview_image20201024-18693-1cwylj1.png";
 import company4 from "../assets/Random Company Logos/preview_image20210726-8632-1sqqpzc.png";
 import company6 from "../assets/Random Company Logos/preview_image20210802-26855-1h0d6zl.png";
-
 import Jobs from "./Jobs";
 
 function HomePage() {

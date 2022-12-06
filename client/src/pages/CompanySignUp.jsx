@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Illustration from "../assets/Illustrations/work.webp";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
-import cookies from "universal-cookie";
-import { useUser } from "../context/User";
 
 function CompanySignUp() {
   const [loading, setLoading] = useState(false);
-  const { setUser } = useUser();
 
   useEffect(() => {
     window.scrollTo({
@@ -20,8 +17,6 @@ function CompanySignUp() {
   }, []);
 
   const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const cookie = new cookies();
 
   const formik = useFormik({
     initialValues: {
@@ -84,12 +79,13 @@ function CompanySignUp() {
       await axios({
         method: "Post",
         data: values,
+        withCredentials: true,
         url: "http://localhost:3000/company/register",
         headers: { "Content-type": "application/json" },
       })
         .then((res) => {
           setLoading(false);
-          setUser("Employer");
+          window.location.href = "/";
         })
         .catch((err) => {
           setLoading(false);

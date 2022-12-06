@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -14,17 +13,21 @@ function ListedCompanyJobCard(props) {
     }
   }, [props]);
   return (
-    <ApplicationCardContainer className="flex justify-between bg-black items-center mb-5 text-white p-5">
-      <div className="w-52">
-        <p>{props.titleofJob}</p>
-      </div>
-      <div className="flex gap-5 items-center">
-        <div className="p-1 flex gap-2">
-          <p>Status: </p>
-          <p className={`${active ? "text-green-500" : "text-red-500"}`}>
-            {props.status}
-          </p>
+    <ApplicationCardContainer className="mb-2 p-2 flex justify-between bg-black text-white">
+      <div>
+        <div>
+          <p>{props.titleofJob}</p>
         </div>
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <p>Status: </p>
+            <p className={`${active ? "text-green-500" : "text-red-500"}`}>
+              {props.status}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex gap-2">
         <Link
           to={`/job/applicants/${props._id}`}
           className="border border-white p-2 duration-500 hover:bg-white cursor-default hover:text-black"

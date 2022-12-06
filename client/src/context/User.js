@@ -8,13 +8,25 @@ export function useUser() {
 
 export function UserProvide({ children }) {
   const [UserType, setUserType] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userInfo, setUserInfo] = useState({});
 
   function setUser(userType) {
     setUserType(userType);
   }
 
+  function setId(id) {
+    setUserId(id);
+  }
+
+  function setInfo(info) {
+    setUserInfo(info);
+  }
+
   return (
-    <UserContext.Provider value={{ UserType, setUser }}>
+    <UserContext.Provider
+      value={{ setUser, UserType, userInfo, setId, userId, setInfo }}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -69,7 +69,13 @@ function Jobs() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = job.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = (number) => setCurrentPage(number);
+  const paginate = (number) => {
+    setCurrentPage(number);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div>

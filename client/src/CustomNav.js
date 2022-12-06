@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "./components/navbar";
 import NavbarEmployer from "./components/NavbarEmployer";
 import NavbarPerson from "./components/NavbarPerson";

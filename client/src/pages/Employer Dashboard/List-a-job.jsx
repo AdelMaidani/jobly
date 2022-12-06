@@ -1,21 +1,24 @@
-import React, { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import CompanyContext from "../../context/companyContext";
 import axios from "axios";
+import { useUser } from "../../context/User";
 
 function ListAjob() {
-  const { company } = useContext(CompanyContext);
   const [change, setChange] = useState(false);
   const navigate = useNavigate("");
+  const { userInfo, userId } = useUser();
 
-  useEffect(() => {
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+  };
 
+  useEffect(() => {
+    scrollToTop();
     const handleResize = () => {
       if (window.innerWidth > 768) {
         setChange(false);
@@ -54,9 +57,9 @@ function ListAjob() {
         .max(20, "Enter valid digits"),
     }),
     onSubmit: (values, { resetForm }) => {
-      formik.values.companyName = company.companyName;
-      formik.values.companyLogo = company.companyLogo;
-      formik.values.companyId = company._id;
+      formik.values.companyName = userInfo.companyName;
+      formik.values.companyLogo = userInfo.companyLogo;
+      formik.values.companyId = userId;
 
       axios({
         method: "Post",
@@ -68,6 +71,7 @@ function ListAjob() {
           console.log(res);
           setChange(!change);
           resetForm({ values: "" });
+          scrollToTop();
         })
         .catch((err) => console.log(err));
     },

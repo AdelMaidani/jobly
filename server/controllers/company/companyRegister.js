@@ -26,7 +26,7 @@ module.exports = companyRegister = async (req, res) => {
   try {
     const savedUser = await user.save();
     const token = jwt.sign(
-      { _id: savedUser._id, type: "company" },
+      { _id: savedUser._id, type: "Employer" },
       process.env.TOKEN
     );
     res.cookie("Jobly", token, { httpOnly: true, path: "/" });

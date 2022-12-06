@@ -1,30 +1,36 @@
-import React, { useEffect, useState, useContext } from "react";
-import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/Logos/JoblyLogo.png";
 import MenuIcon from "../assets/Icons/menu.png";
-import CompanyContext from "../context/companyContext";
+import { useUser } from "../context/User";
 
 function NavbarEmployer() {
-  const { showMenu, setShowMenu } = useContext(CompanyContext);
-  const navigate = useNavigate();
-  const [company, setCompany] = useState({});
+  const { userId, userInfo, setId, setInfo } = useUser();
+  const [showMenu, setShowMenu] = useState(true);
 
   useEffect(() => {
-    const cookie = new Cookies();
-    const decode = jwtDecode(cookie.get("token"));
-
     axios({
-      method: "Post",
-      url: "http://localhost:3000/company/data",
-      headers: { "content-type": "application/json" },
-      data: { id: decode._id },
+      method: "Get",
+      withCredentials: true,
+      url: "http://localhost:3000/userVerify",
     })
-      .then((res) => setCompany(res.data[0]))
+      .then((res) => {
+        setId(res.data._id);
+      })
       .catch((err) => console.log(err));
-  }, []);
+
+    if (userId === "") {
+    } else {
+      axios({
+        method: "Post",
+        url: "http://localhost:3000/company/data",
+        data: { id: userId },
+      }).then((res) => {
+        setInfo(res.data[0]);
+      });
+    }
+  }, [userId]);
 
   const navLinkActive = ({ isActive }) => {
     return {
@@ -34,11 +40,16 @@ function NavbarEmployer() {
   };
 
   const Logout = () => {
-    document.cookie = [
-      "token =; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;",
-    ];
-    navigate("/");
-    window.location.reload();
+    axios({
+      method: "get",
+      url: "http://localhost:3000/company/logout",
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/";
+      })
+      .catch((err) => console.log(err));
   };
 
   const onClickLink = () => {
@@ -60,7 +71,7 @@ function NavbarEmployer() {
     <div>
       <div className="bg-black flex justify-between items-center ">
         <p className="text-white font-bold hidden md:block ml-44">
-          {company.companyName}
+          {userInfo.companyName}
         </p>
         <img
           className={`" h-9 transition duration-1000 hover:rotate-90 md:hidden " ${
@@ -77,7 +88,7 @@ function NavbarEmployer() {
             showMenu ? "absolute  left-12 " : "null"
           }`}
         >
-          {company.companyName}
+          {userInfo.companyName}
         </p>
         <img className="h-14 transition duration-1000 " src={Logo} alt="Logo" />
       </div>
@@ -88,7 +99,7 @@ function NavbarEmployer() {
       >
         <div className={` "flex justify-center " ${showMenu ? "p-1" : null}`}>
           <img
-            src={company.companyLogo}
+            src={userInfo.companyLogo}
             alt="companyLogo"
             className={`" rounded-full md:border-2 h-28 w-28 md:block" ${
               showMenu ? "block  border-white border-2" : "hidden"

@@ -31,7 +31,7 @@ module.exports = registerPerson = async (req, res) => {
       process.env.TOKEN
     );
     res.cookie("Jobly", token, { httpOnly: true, path: "/" });
-    res.send("logged in");
+    res.send("registered");
   } catch (err) {
     res.status(400).send(err);
   }

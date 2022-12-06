@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import PersonContext from "../../context/personContext";
+import { useUser } from "../../context/User";
 import ApplicationCard from "../../components/ApplicationCard";
 
 function Applications() {
-  const { Person } = useContext(PersonContext);
+  const { userId } = useUser();
   const [jobs, setJobs] = useState([]);
   const [dataStatus, setDataStatus] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
@@ -19,7 +19,7 @@ function Applications() {
       method: "Post",
       url: "http://localhost:3000/job/appliedjobs",
       headers: { "content-type": "Application/json" },
-      data: { personId: Person._id },
+      data: { personId: userId },
     })
       .then((res) => {
         if (res.data.length === 0) {
@@ -30,7 +30,7 @@ function Applications() {
         }
       })
       .catch((err) => console.log(err));
-  }, [Person]);
+  }, [userId]);
 
   const allJobs = () => {
     setJobs([]);
@@ -40,7 +40,7 @@ function Applications() {
       method: "Post",
       url: "http://localhost:3000/job/appliedjobs",
       headers: { "content-type": "Application/json" },
-      data: { personId: Person._id },
+      data: { personId: userId },
     })
       .then((res) => {
         if (res.data.length === 0) {
@@ -59,7 +59,7 @@ function Applications() {
       method: "Post",
       url: "http://localhost:3000/job/acceptedJobs",
       headers: { "content-type": "Application/json" },
-      data: { personId: Person._id },
+      data: { personId: userId },
     })
       .then((res) => {
         if (res.data.length === 0) {
@@ -78,7 +78,7 @@ function Applications() {
       method: "Post",
       url: "http://localhost:3000/job/rejectedjobs",
       headers: { "content-type": "Application/json" },
-      data: { personId: Person._id },
+      data: { personId: userId },
     })
       .then((res) => {
         if (res.data.length === 0) {
@@ -97,7 +97,7 @@ function Applications() {
       method: "Post",
       url: "http://localhost:3000/job/pendingForReviewjobs",
       headers: { "content-type": "Application/json" },
-      data: { personId: Person._id },
+      data: { personId: userId },
     })
       .then((res) => {
         if (res.data.length === 0) {
@@ -152,7 +152,7 @@ function Applications() {
           return (
             <ApplicationCard
               companyId={data.companyId}
-              Person={Person._id}
+              Person={userId}
               titleofJob={data.titleofJob}
               key={data._id}
               companyName={data.companyName}

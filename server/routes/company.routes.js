@@ -5,7 +5,10 @@ const {
   CompanyDescription,
   companyJobs,
 } = require("../controllers/company/companyData");
-const companyLogin = require("../controllers/company/companyLogin");
+const {
+  companyLogin,
+  companyLogout,
+} = require("../controllers/company/companyLogin");
 const companyRegister = require("../controllers/company/companyRegister");
 const {
   editCompanyName,
@@ -24,6 +27,7 @@ const {
 
 router.post("/register", companyRegister);
 router.post("/login", companyLogin);
+router.get("/logout", companyLogout);
 router.post("/data", companyData);
 router.get("/companies", companies);
 router.post("/CompanyDescription", CompanyDescription);

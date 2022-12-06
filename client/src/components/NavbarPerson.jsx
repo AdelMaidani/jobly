@@ -1,20 +1,46 @@
-import React, { useEffect, useState, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/Logos/JoblyLogo.png";
 import MenuIcon from "../assets/Icons/menu.png";
-import PersonContext from "../context/personContext";
+import { useUser } from "../context/User";
+import axios from "axios";
 
 function NavbarPerson() {
-  const { Person } = useContext(PersonContext);
-  const navigate = useNavigate();
+  const { userId, userInfo, setId, setInfo } = useUser();
   const [showMenu, setShowMenu] = useState(true);
 
+  useEffect(() => {
+    axios({
+      method: "Get",
+      withCredentials: true,
+      url: "http://localhost:3000/userVerify",
+    })
+      .then((res) => {
+        setId(res.data._id);
+      })
+      .catch((err) => console.log(err));
+
+    if (userId === "") {
+    } else {
+      axios({
+        method: "Post",
+        url: "http://localhost:3000/person/personData",
+        data: { id: userId },
+      }).then((res) => {
+        setInfo(res.data[0]);
+      });
+    }
+  }, [userId]);
+
   const Logout = () => {
-    document.cookie = [
-      "token =; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;",
-    ];
-    navigate("/");
-    window.location.reload();
+    axios({
+      method: "Get",
+      withCredentials: true,
+      url: "http://localhost:3000/person/logout",
+    }).then((res) => {
+      console.log(res);
+      window.location.href = "/";
+    });
   };
 
   const navLinkActive = ({ isActive }) => {
@@ -44,7 +70,7 @@ function NavbarPerson() {
     <div>
       <div className="bg-black flex items-center ">
         <p className="text-white font-bold hidden md:block ml-44">
-          {Person.fullName}
+          {userInfo.fullName}
         </p>
         <img
           className={`" h-9 transition duration-1000 hover:rotate-90 md:hidden " ${
@@ -69,7 +95,7 @@ function NavbarPerson() {
       >
         <div className={` "flex justify-center " ${showMenu ? "p-1" : null}`}>
           <img
-            src={Person.profilePicture}
+            src={userInfo.profilePicture}
             alt="person"
             className={`" rounded-full  h-28 w-28 border md:block" ${
               showMenu ? "block  border-white border-2" : "hidden"

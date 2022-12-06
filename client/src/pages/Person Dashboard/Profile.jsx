@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import editIcon from "../../assets/Icons/edit.png";
-import PersonContext from "../../context/personContext";
+import { useUser } from "../../context/User";
 
 function Profile() {
-  const { Person } = useContext(PersonContext);
+  const { userInfo } = useUser();
   const [description, setDescription] = useState({});
   const [label, setLabel] = useState("");
   const [fieldName, setFieldName] = useState("");
   const [change, setChange] = useState(false);
-  const id = { personId: Person._id };
+  const id = { personId: userInfo._id };
 
   const formik = useFormik({
     initialValues: {
@@ -45,9 +45,9 @@ function Profile() {
       method: "Post",
       headers: { "content-type": "application/json" },
       url: "http://localhost:3000/person/personData",
-      data: { id: Person._id },
+      data: { id: userInfo._id },
     }).then((res) => setDescription(res.data[0]));
-  }, [Person]);
+  }, [userInfo]);
 
   const edit = (Label, fieldName) => {
     setLabel(Label);

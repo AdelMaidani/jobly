@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Illustration from "../assets/Illustrations/work.webp";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import { useUser } from "../context/User";
 import { useState } from "react";
 
 function CompanyLogin() {
@@ -15,9 +14,7 @@ function CompanyLogin() {
     });
   }, []);
 
-  const { setUser } = useUser();
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +36,8 @@ function CompanyLogin() {
         withCredentials: true,
       })
         .then((res) => {
-          setUser("Employer");
+          console.log(res);
+          window.location.href = "/";
         })
         .catch((err) => setError(err.response.data));
     },

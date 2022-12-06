@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import PersonContext from "../../context/personContext";
+import { useUser } from "../../context/User";
 
 function JobDescription() {
-  const { Person } = useContext(PersonContext);
+  const { userId } = useUser();
   const id = useParams();
   const [description, setDescription] = useState({});
   const [applied, setApplied] = useState(false);
@@ -18,7 +18,7 @@ function JobDescription() {
       method: "Post",
       url: "http://localhost:3000/job/checkIfApplied",
       headers: { "content-type": "application/json" },
-      data: { jobId: id.id, personId: Person._id },
+      data: { jobId: id.id, personId: userId },
     })
       .then((res) => {
         if (res.data === true) {
@@ -37,14 +37,14 @@ function JobDescription() {
     })
       .then((res) => setDescription(res.data[0]))
       .catch((err) => console.log(err));
-  }, [id, Person]);
+  }, [id, userId]);
 
   const Apply = () => {
     axios({
       method: "Post",
       url: "http://localhost:3000/job/apply",
       headers: { "content-type": "application/json" },
-      data: { jobId: id.id, personId: Person._id },
+      data: { jobId: id.id, personId: userId },
     })
       .then(() => setApplied(true))
       .catch((err) => console.log(err));
@@ -67,7 +67,7 @@ function JobDescription() {
   };
 
   return (
-    <div className="ml-44 mb-5 mr-5">
+    <div className="ml-44 mb-5 mr-5 mt-5">
       <div className="flex justify-between items-center">
         <div>
           <h3 className="font-bold text-lg">

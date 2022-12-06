@@ -1,16 +1,15 @@
-import React, { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import editIcon from "../../assets/Icons/edit.png";
-import CompanyContext from "../../context/companyContext";
+import { useUser } from "../../context/User";
 import { useFormik } from "formik";
 
 function Profile() {
-  const { company } = useContext(CompanyContext);
-  const [description, setDescription] = useState({});
+  const { userId, userInfo } = useUser();
   const [label, setLabel] = useState("");
   const [fieldName, setFieldName] = useState("");
   const [change, setChange] = useState(false);
-  const id = { companyId: company._id };
+  const id = { companyId: userId };
 
   const formik = useFormik({
     initialValues: {
@@ -38,16 +37,8 @@ function Profile() {
     },
   });
 
-  useEffect(() => {
-    axios({
-      method: "Post",
-      headers: { "content-type": "application/json" },
-      url: "http://localhost:3000/company/data",
-      data: { id: company._id },
-    }).then((res) => setDescription(res.data[0]));
-  }, [company]);
-
   const edit = (Label, fieldName) => {
+    document.getElementById("editing").style.overflow = "hidden";
     setLabel(Label);
     setFieldName(fieldName);
     setChange(!change);
@@ -63,7 +54,7 @@ function Profile() {
   }, []);
 
   return (
-    <div className="md:ml-44 m-5 flex flex-col z-10 ">
+    <div id="editing" className="md:ml-44 m-5 flex flex-col z-10">
       <div>
         <form
           onSubmit={formik.handleSubmit}
@@ -105,7 +96,7 @@ function Profile() {
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Company Name:</p>
-            <p>{description.companyName}</p>
+            <p>{userInfo.companyName}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
@@ -117,7 +108,7 @@ function Profile() {
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Address:</p>
-            <p>{description.address}</p>
+            <p>{userInfo.address}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
@@ -129,7 +120,7 @@ function Profile() {
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Country:</p>
-            <p>{description.country}</p>
+            <p>{userInfo.country}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
@@ -141,7 +132,7 @@ function Profile() {
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Email:</p>
-            <p>{description.email}</p>
+            <p>{userInfo.email}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
@@ -153,7 +144,7 @@ function Profile() {
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Linkedin:</p>
-            <p>{description.linkedin}</p>
+            <p>{userInfo.linkedin}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
@@ -165,7 +156,7 @@ function Profile() {
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Mobile Number:</p>
-            <p>{description.mobileNumber}</p>
+            <p>{userInfo.mobileNumber}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
@@ -187,7 +178,7 @@ function Profile() {
             </span>
           </div>
           <span>
-            <p>{description.aboutTheCompany}</p>
+            <p>{userInfo.aboutTheCompany}</p>
           </span>
         </div>
       </div>

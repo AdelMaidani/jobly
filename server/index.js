@@ -15,10 +15,12 @@ const companyRoutes = require("./routes/company.routes");
 const personRoutes = require("./routes/person.routes");
 const s3Routes = require("./routes/s3.routes");
 const jobRoutes = require("./routes/job.routes");
+const UserRoute = require("./routes/UserType");
 
 app.use("/company", companyRoutes);
 app.use("/person", personRoutes);
 app.use("/", s3Routes);
 app.use("/job", jobRoutes);
+app.use("/userVerify", UserRoute);
 
 app.listen(3000, () => console.log("Server is Running"));

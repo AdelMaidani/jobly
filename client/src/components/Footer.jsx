@@ -1,12 +1,11 @@
-import React from "react";
 import Logo from "../assets/Logos/JoblyLogo.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Footer() {
   return (
-    <Box className=" mt-auto bg-black text-white text-xs p-5 text-center flex flex-col md:flex-row justify-center items-center">
-      <div className="w-80 flex flex-col">
+    <Box className=" mt-auto bg-black text-white text-xs p-5 text-center flex flex-col md:flex-row justify-around items-center">
+      <div className="w-80 flex flex-col sm:text-left">
         <h3 className="underline underline-offset-8 mb-3 ">CONTACT US</h3>
         <div className="flex flex-col text-xs">
           <span className="text-gray-300"> Ahuachapán</span>

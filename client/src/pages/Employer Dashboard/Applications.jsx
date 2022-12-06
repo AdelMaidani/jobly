@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApplicationCard from "../../components/ListedCompanyJobCard";
-import CompanyContext from "../../context/companyContext";
+import { useUser } from "../../context/User";
 
 function Applications() {
-  const { company } = useContext(CompanyContext);
   const [job, setJobs] = useState([]);
+  const { userInfo } = useUser();
   const navigate = useNavigate();
   const [dataStatus, setDataStatus] = useState(true);
 
@@ -20,7 +20,7 @@ function Applications() {
       method: "Post",
       headers: { "content-type": "application/json" },
       url: "http://localhost:3000/job/listedjob",
-      data: { companyName: company.companyName },
+      data: { companyName: userInfo.companyName },
     })
       .then((res) => {
         if (res.data.length === 0) {
@@ -31,7 +31,7 @@ function Applications() {
         }
       })
       .catch((err) => console.log(err));
-  }, [company]);
+  }, [userInfo]);
 
   return (
     <div className="md:ml-44 m-5 flex flex-col gap-4">

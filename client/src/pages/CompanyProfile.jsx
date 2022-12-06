@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import Logo from "../assets/Random Company Logos/preview_image20201024-18693-1cwylj1.png";
 
 function CompanyProfile() {
   const id = useParams();
@@ -46,8 +45,14 @@ function CompanyProfile() {
       </div>
       <div className={` ml-5 mr-5 mb-5 ${loading ? "hidden" : ""}`}>
         <div className="flex justify-between items-center">
-          <span className="font-bold text-2xl md:text-4xl">EtherScan</span>
-          <img className="h-36 rounded-full" src={Logo} alt="Logo" />
+          <span className="font-bold text-2xl md:text-4xl">
+            {description.companyName}
+          </span>
+          <img
+            className="h-36 rounded-full"
+            src={description.companyLogo}
+            alt="Logo"
+          />
         </div>
         <div>
           <h3 className="font-bold md:text-lg">About the Company</h3>

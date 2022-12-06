@@ -2,7 +2,7 @@ const person = require("../../models/person");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-module.exports = personLogin = async (req, res) => {
+const personLogin = async (req, res) => {
   const user = await person.findOne({ email: req.body.email });
   if (!user) return res.status(401).send("email doesn't exist");
 
@@ -13,3 +13,9 @@ module.exports = personLogin = async (req, res) => {
   res.cookie("Jobly", token, { httpOnly: true, path: "/" });
   res.send("logged in");
 };
+
+const personLogout = (req, res) => {
+  res.clearCookie("Jobly").sendStatus(200);
+};
+
+module.exports = { personLogin, personLogout };

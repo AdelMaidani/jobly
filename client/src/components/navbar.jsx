@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../assets/Logos/JoblyLogo.png";
 import MenuIcon from "../assets/Icons/menu.png";
 import { Link, NavLink } from "react-router-dom";

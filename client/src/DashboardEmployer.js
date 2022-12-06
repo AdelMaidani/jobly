@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import JobDescription from "./pages/Employer Dashboard/JobDescription";
 import NavbarEmployer from "./components/NavbarEmployer";
@@ -7,12 +6,12 @@ import Applicants from "./pages/Employer Dashboard/Applicants";
 import Applications from "./pages/Employer Dashboard/Applications";
 import ListaJob from "./pages/Employer Dashboard/List-a-job";
 import Profile from "./pages/Employer Dashboard/Profile";
-import { CompanyProvider } from "./context/companyContext";
+import { UserProvide } from "./context/User";
 
 function DashboardEmployer() {
   return (
     <div>
-      <CompanyProvider>
+      <UserProvide>
         <NavbarEmployer />
         <Routes>
           <Route path="/application" element={<Applications />} />
@@ -25,7 +24,7 @@ function DashboardEmployer() {
           <Route path="/job/:id" element={<JobDescription />} />
           <Route path="/job/applicants/:id" element={<Applicants />} />
         </Routes>
-      </CompanyProvider>
+      </UserProvide>
     </div>
   );
 }

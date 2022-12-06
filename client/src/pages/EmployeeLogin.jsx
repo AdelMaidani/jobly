@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Illustration from "../assets/Illustrations/work.webp";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import cookies from "universal-cookie";
-import { useUser } from "../context/User";
-import MainApp from "../MainApp";
 
 function EmployeeLogin() {
   const [loading, setLoading] = useState(false);
-  const { setUser } = useUser();
 
   useEffect(() => {
     window.scrollTo({
@@ -19,8 +15,6 @@ function EmployeeLogin() {
     });
   }, []);
 
-  const navigate = useNavigate();
-  const cookie = new cookies();
   const [error, setError] = useState();
 
   const formik = useFormik({
@@ -43,11 +37,11 @@ function EmployeeLogin() {
         headers: { "Content-Type": "Application/json" },
         url: "http://localhost:3000/person/login",
         data: values,
+        withCredentials: true,
       })
         .then((res) => {
           setLoading(false);
-          setUser("Employee");
-          MainApp();
+          window.location.href = "/";
         })
         .catch((err) => {
           setLoading(false);

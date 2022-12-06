@@ -1,5 +1,8 @@
 const personRegister = require("../controllers/person/personRegister");
-const personLogin = require("../controllers/person/personLogin");
+const {
+  personLogin,
+  personLogout,
+} = require("../controllers/person/personLogin");
 const { personData } = require("../controllers/person/personData");
 const {
   editAddress,
@@ -15,6 +18,7 @@ const router = require("express").Router();
 router.post("/register", personRegister);
 router.post("/login", personLogin);
 router.post("/personData", personData);
+router.get("/logout", personLogout);
 
 // Update Person Info
 

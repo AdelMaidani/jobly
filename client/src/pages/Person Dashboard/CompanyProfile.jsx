@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
@@ -33,7 +33,7 @@ function CompanyProfile() {
   }, [id]);
 
   return (
-    <div className="ml-5 mr-5 md:ml-44">
+    <div className="ml-5 mr-5 md:ml-44 mt-5">
       <div className="flex justify-between items-center">
         <span className="font-bold text-2xl md:text-4xl">
           {description.companyName}

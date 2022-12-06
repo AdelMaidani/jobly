@@ -47,7 +47,7 @@ function Jobs(props) {
           />
         </div>
         <div className="p-2 w-60 md:w-auto">
-          <span className="flex flex-col md:flex-row gap-1">
+          <span className="flex flex-col md:flex-row gap-1 w-3/4 sm:w-full">
             {props.titleofJob}
             <Link
               to={`/company/${props.companyId}`}

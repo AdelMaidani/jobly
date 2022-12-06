@@ -11,7 +11,7 @@ function Companies() {
   const [SecondInput, setSecondInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
-  const [postsPerPage] = useState(5);
+  const [postsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ function Companies() {
           <span>Not found</span>
         </div>
         <div className="flex gap-4 cursor-default justify-center flex-wrap m-10">
-          {companies.map((data) => (
+          {currentPosts.map((data) => (
             <CompanyContainer
               key={data._id}
               className="flex flex-col w-52 items-center justify-center border-4 bg-black border-black p-5"
@@ -107,7 +107,7 @@ function Companies() {
               <div>
                 <img
                   src={data.companyLogo}
-                  className="h-24 rounded-full"
+                  className="h-24 rounded-full bg-black"
                   alt="logo"
                 />
               </div>

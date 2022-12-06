@@ -80,11 +80,11 @@ function JobDescription() {
                 at Co: {description.companyName}
               </Link>
             </h3>
-            <div className="flex mt-5">{skills()}</div>
+            <div className="flex mt-5 flex-wrap gap-1">{skills()}</div>
           </div>
           <div>
             <img
-              className="hidden md:block md:h-32"
+              className="hidden md:block md:h-32 rounded-full"
               src={description.companyLogo}
               alt="Logo"
             />
@@ -109,7 +109,7 @@ function JobDescription() {
           <br />
           <h3 className="text-md font-bold">Salary</h3>
           <br />
-          <p>{description.salary}</p>
+          <p>Rs. {description.salary}</p>
         </div>
         <br />
         <div className=" transition duration-500 bg-black text-white w-20 text-center p-2 hover:bg-white border border-black hover:text-black hover:boder-black">
