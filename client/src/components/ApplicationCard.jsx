@@ -24,27 +24,54 @@ function ApplicationCard(props) {
   };
 
   return (
-    <ApplicationCardContainer className="flex justify-between text-xs bg-black items-center mb-5 text-white p-5">
-      <div>
-        <h3>{props.titleofJob}</h3>
-        <h3>{props.companyName}</h3>
-      </div>
-      <div className="flex gap-5">
-        <h3 className="p-1 flex gap-3">Status: {renderStatus()} </h3>
-        <Link
-          to={`/company/${props.companyId}`}
-          className="border border-white p-1 hover:bg-white cursor-default hover:text-black"
-        >
-          {props.button}
-        </Link>
-        <Link
-          to={`/job/${props._id}`}
-          className="border text-center border-white p-1 hover:bg-white cursor-default hover:text-black"
-        >
-          Job Description
-        </Link>
-      </div>
-    </ApplicationCardContainer>
+    <div>
+      <ApplicationCardContainer className="hidden sm:flex justify-between text-xs bg-black items-center mb-5 text-white p-5">
+        <div>
+          <h3>{props.titleofJob}</h3>
+          <h3>Co: {props.companyName}</h3>
+        </div>
+        <div className="flex gap-5">
+          <h3 className="p-1 flex gap-3">Status: {renderStatus()} </h3>
+          <Link
+            to={`/company/${props.companyId}`}
+            className="border border-white p-1 hover:bg-white cursor-default hover:text-black"
+          >
+            {props.button}
+          </Link>
+          <Link
+            to={`/job/${props._id}`}
+            className="border text-center border-white p-1 hover:bg-white cursor-default hover:text-black"
+          >
+            Job Description
+          </Link>
+        </div>
+      </ApplicationCardContainer>
+      <ApplicationCardContainer className="flex sm:hidden flex-col gap-4 text-xs bg-black mb-5 text-white p-5">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3>{props.titleofJob}</h3>
+            <h3>{props.companyName}</h3>
+          </div>
+          <div className="flex gap-5">
+            <h3 className="p-1 flex gap-3">Status: {renderStatus()} </h3>
+          </div>
+        </div>
+        <div className="flex justify-around">
+          <Link
+            to={`/company/${props.companyId}`}
+            className="border border-white p-1 hover:bg-white cursor-default hover:text-black"
+          >
+            {props.button}
+          </Link>
+          <Link
+            to={`/job/${props._id}`}
+            className="border text-center border-white p-1 hover:bg-white cursor-default hover:text-black"
+          >
+            Job Description
+          </Link>
+        </div>
+      </ApplicationCardContainer>
+    </div>
   );
 }
 

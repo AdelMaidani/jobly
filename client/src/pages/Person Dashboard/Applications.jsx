@@ -112,7 +112,7 @@ function Applications() {
   return (
     <div className="md:ml-44 m-5 flex flex-col gap-4">
       <div className="text-lg flex gap-4 font-bold">
-        <span>Sort by:</span>
+        <span className="hidden sm:block">Sort by:</span>
         <button
           className={`${
             activeMenu === "All" ? "underline underline-offset-4" : ""

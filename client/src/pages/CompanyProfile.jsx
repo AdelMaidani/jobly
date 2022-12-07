@@ -64,7 +64,7 @@ function CompanyProfile() {
             <br />
             <div className="flex flex-col md:grid md:grid-cols-3 md:gap-10">
               {jobs.map((data) => (
-                <MiniJobCard className="mb-5 bg-black text-white p-5 flex justify-between items-center">
+                <MiniJobCard className="mb-5 bg-black text-white p-3 text-sm flex justify-between items-center">
                   <span>{data.titleofJob}</span>
                   <Link
                     to={`/job/${data._id}`}

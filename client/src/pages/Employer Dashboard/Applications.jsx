@@ -38,7 +38,9 @@ function Applications() {
       <div className="text-ls font-bold">Listed Jobs</div>
       <div
         onClick={() => navigate("/listajob")}
-        className={` hover:underline ${dataStatus ? "hidden" : "block"}`}
+        className={` hover:underline cursor-pointer ${
+          dataStatus ? "hidden" : "block"
+        }`}
       >
         Click here to list a job
       </div>

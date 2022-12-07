@@ -56,7 +56,7 @@ function CompanyProfile() {
             {jobs.map((data) => (
               <MiniJobCard
                 key={data._id}
-                className="mb-5 bg-black text-white p-5 flex justify-between items-center"
+                className="mb-5 bg-black text-sm text-white p-3 flex justify-between items-center"
               >
                 <span>{data.titleofJob}</span>
                 <Link

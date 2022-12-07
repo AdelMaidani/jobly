@@ -67,7 +67,7 @@ function JobDescription() {
   };
 
   return (
-    <div className="ml-44 mb-5 mr-5 mt-5">
+    <div className="m-5 md:ml-44 mt-5 mr-5 mb-5 flex flex-col">
       <div className="flex justify-between items-center">
         <div>
           <h3 className="font-bold text-lg">
@@ -75,11 +75,11 @@ function JobDescription() {
           </h3>
           <div className="flex mt-5">{Tags()}</div>
         </div>
-        <div>
+        <div className="hidden sm:block">
           <img className="h-40" src={description.companyLogo} alt="Logo" />
         </div>
       </div>
-      <div>
+      <div className="mt-5 sm:mt-0">
         <h3 className="text-md font-bold">About the Job</h3>
         <br />
         <p>{description.aboutTheJob}</p>
@@ -97,7 +97,7 @@ function JobDescription() {
         <p>Rs. {description.salary}</p>
       </div>
       <br />
-      <div className=" transition duration-500">
+      <div className="transition duration-500">
         {applied ? (
           <button className=" w-20 text-center p-2 bg-white border border-black text-black ">
             Applied

@@ -14,8 +14,8 @@ function ListedCompanyJobCard(props) {
   }, [props]);
   return (
     <ApplicationCardContainer className="mb-2 p-2 flex justify-between bg-black text-white">
-      <div>
-        <div>
+      <div className="sm:flex w-full justify-between sm:p-2">
+        <div className="flex items-center">
           <p>{props.titleofJob}</p>
         </div>
         <div className="flex items-center justify-between">

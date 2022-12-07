@@ -67,7 +67,7 @@ function NavbarPerson() {
   }, []);
 
   return (
-    <div>
+    <div className="sticky top-0">
       <div className="bg-black flex items-center ">
         <p className="text-white font-bold hidden md:block ml-44">
           {userInfo.fullName}

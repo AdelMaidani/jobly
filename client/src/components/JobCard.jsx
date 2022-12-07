@@ -41,7 +41,7 @@ function Jobs(props) {
       <Link to={`/job/${props.link}`} className="flex items-center">
         <div className="p-2 w-20 md:w-auto">
           <img
-            className="md:h-24 bg-white"
+            className="md:h-24 rounded-full bg-white"
             src={props.companyLogo}
             alt="Logo"
           />
@@ -69,7 +69,7 @@ function Jobs(props) {
       <div>
         <Link
           to={`/job/${props.link}`}
-          className="border border-white bg-black hover:bg-white hover:text-black duration-500  p-2 "
+          className="border rounded-lg border-white bg-black hover:bg-white hover:text-black duration-500  p-2 "
         >
           View
         </Link>

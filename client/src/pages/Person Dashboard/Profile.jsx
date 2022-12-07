@@ -167,13 +167,13 @@ function Profile() {
             className="h-4 hover:rotate-45 duration-200"
             src={editIcon}
             alt="edit"
-            onClick={() => edit("Mobile Number", "mobileNumber")}
+            onClick={() => edit("Skills", "skills")}
           />
         </div>
         <div className="flex items-center gap-3">
           <span className="flex gap-4">
             <p className="font-bold">Skills:</p>
-            <p>{description.mobileNumber}</p>
+            <p>{description.skills}</p>
           </span>
           <img
             className="h-4 hover:rotate-45 duration-200"
